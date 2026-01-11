@@ -1,0 +1,6 @@
+@NtpcNexus_HostAddress = http://localhost:5144
+
+GET {{NtpcNexus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
