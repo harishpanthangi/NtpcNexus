@@ -92,7 +92,7 @@ const App = () => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-gray-200 dark:border-slate-800 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src="/ntpc-logo.png" alt="NTPC Logo" className="h-10 w-auto" />
+          <img src={`${import.meta.env.BASE_URL}ntpc-logo.png`} alt="NTPC Logo" className="h-10 w-auto" />
         </div>
         <div className="hidden md:flex items-center gap-8">
           <a href="https://ccitapps.ntpc.co.in/ccitapps" className="text-sm font-medium hover:text-orange-600 transition-colors dark:text-slate-300 dark:hover:text-orange-400" target="_blank">Existing Apps</a>
@@ -115,7 +115,7 @@ const App = () => {
       <Hero />
 
       {/* Explorer Section */}
-      <section className="max-w-7xl mx-auto px-6 mt-12" id="app-container">
+      <section className="/*max-w-7xl*/ mx-auto px-6 mt-12" id="app-container">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
             <h2 className="text-3xl font-bold font-outfit mb-2">Application Explorer</h2>
@@ -262,7 +262,7 @@ const App = () => {
       <footer className="border-t border-gray-200 dark:border-slate-800 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
-            <img src="/ntpc-logo.png" alt="NTPC Logo" className="h-8 w-auto /*grayscale opacity-50*/ hover:grayscale-0 hover:opacity-100 transition-all" />
+            <img src={`${import.meta.env.BASE_URL}ntpc-logo.png`} alt="NTPC Logo" className="h-8 w-auto /*grayscale opacity-50*/ hover:grayscale-0 hover:opacity-100 transition-all" />
             <span className="text-sm font-bold tracking-widest text-slate-500 dark:text-slate-400">© 2026 NTPC LIMITED. ALL RIGHTS RESERVED.</span>
           </div>
           <div className="flex items-center gap-6 text-slate-500 text-sm font-medium dark:text-slate-400">

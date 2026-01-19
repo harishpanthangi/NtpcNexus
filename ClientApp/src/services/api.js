@@ -1,4 +1,6 @@
-const API_BASE_URL = '/api';
+import { MOCK_APPS } from '../constants';
+
+const API_BASE_URL = `${import.meta.env.BASE_URL}api`;
 
 export const fetchApplications = async () => {
     try {

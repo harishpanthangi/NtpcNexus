@@ -34,14 +34,8 @@ const SubmissionShowcase = () => {
     const SubmissionCard = ({ item }) => (
         <div className="submission-card flex-shrink-0 w-80 p-5 mx-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
             <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-red-100 dark:from-slate-800 dark:to-slate-700 flex items-center justify-center text-orange-600 font-bold text-sm">
-                    {item.submittedBy ? item.submittedBy.substring(0, 2).toUpperCase() : 'US'}
-                </div>
-                <div>
-                    <h4 className="font-bold /*text-slate-800*/ dark:text-gray-100 text-sm">{item.submittedBy || 'Anonymous'}</h4>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">{item.department || 'Employee'}</span>
-                </div>
-                <div className="ml-auto">
+                
+                <div className="/*ml-auto*/">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${item.submissionType === 'NewAppProposal' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-300' :
                         item.submissionType === 'FeatureRequest' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300' :
                             'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-300'

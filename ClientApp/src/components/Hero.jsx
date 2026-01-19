@@ -29,7 +29,7 @@ const Hero = () => {
                         NTPC Digital Ecosystem
                     </span>
                 </h1>
-                <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-light">
+                <p className="text-lg md:text-xl /*text-slate-500*/ dark:text-slate-400 max-w-2xl mx-auto font-light">
                     Your insights drive our innovation. Your ideas power smarter operations, better experiences, and a more sustainable tomorrow.
                     Share a feature, fix a friction, or spark something bold.
                 </p>

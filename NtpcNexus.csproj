@@ -4,6 +4,9 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
+    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,14 +19,21 @@
     <Content Remove="NtpcNexus.API\**" />
     <EmbeddedResource Remove="NtpcNexus.API\**" />
     <None Remove="NtpcNexus.API\**" />
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="ClientApp\**" />
+    <None Include="ClientApp\**" Exclude="ClientApp\node_modules\**" />
   </ItemGroup>
 
 
 
-  <PropertyGroup>
-    <SpaRoot>ClientApp\</SpaRoot>
-    <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
-    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-  </PropertyGroup>
+
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+
+
+  </Target>
 
 </Project>

@@ -13,12 +13,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure CORS
+// Configure CORS
 builder.Services.AddCors(options =>
 {
+    var allowedOrigins = builder.Configuration["AllowedOrigins"]?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? new[] { "*" };
     options.AddPolicy("AllowClientApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173") // Default Vite port, update if needed
+            policy.WithOrigins(allowedOrigins)
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -36,6 +38,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UsePathBase("/NtpcNexus");
+
+app.UsePathBase("/NtpcNexusApi/api");
 
 app.UseCors("AllowClientApp");
 
