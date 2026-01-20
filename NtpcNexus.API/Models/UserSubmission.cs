@@ -13,7 +13,10 @@ namespace NtpcNexus.API.Models
         [StringLength(50)]
         public string SubmissionType { get; set; } = string.Empty;
 
-        public int? ReferenceId { get; set; }
+        public int? ProjectId { get; set; }
+
+        [ForeignKey("ProjectId")]
+        public Application? Application { get; set; }
 
         [StringLength(255)]
         public string? Title { get; set; }

@@ -36,3 +36,25 @@ export const searchApplications = async (query) => {
         return [];
     }
 }
+
+export const submitUserFeedback = async (submissionData) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/usersubmissions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submissionData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.title || 'Failed to submit feedback');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to submit feedback:", error);
+        throw error;
+    }
+};

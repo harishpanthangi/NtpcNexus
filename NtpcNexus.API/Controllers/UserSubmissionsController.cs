@@ -31,6 +31,7 @@ namespace NtpcNexus.API.Controllers
         [HttpPost]
         public async Task<ActionResult<UserSubmission>> PostUserSubmission(UserSubmission userSubmission)
         {
+            userSubmission.SubmittedBy = "adm";
             _context.UserSubmissions.Add(userSubmission);
             await _context.SaveChangesAsync();
 

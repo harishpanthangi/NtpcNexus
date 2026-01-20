@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { CATEGORIES } from './constants';
-import { fetchApplications } from './services/api';
+import { fetchApplications, submitUserFeedback } from './services/api';
 import Hero from './components/Hero';
 import FeedbackModal from './components/FeedbackModal';
 import ProposalModal from './components/ProposalModal';
@@ -18,6 +18,7 @@ const App = () => {
   const [showProposalModal, setShowProposalModal] = useState(false);
   const [submissions, setSubmissions] = useState([]);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [refreshShowcase, setRefreshShowcase] = useState(0);
 
   // Success Modal State
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -49,24 +50,59 @@ const App = () => {
     });
   }, [selectedCategory, searchQuery, apps]);
 
-  const handleSubmit = (data) => {
-    setSubmissions([data, ...submissions]);
-    setSelectedApp(null);
-    setSuccessModalContent({
-      title: "Feedback Submitted!",
-      message: "Thank you for your valuable feedback. Our team will review it shortly."
-    });
-    setShowSuccessModal(true);
+  const handleSubmit = async (data) => {
+    try {
+      const payload = {
+        submissionType: data.type,
+        projectId: data.appId,
+        description: data.content,
+        priority: data.priority,
+        status: "Pending"
+      };
+
+      await submitUserFeedback(payload);
+
+      setRefreshShowcase(prev => prev + 1);
+      setSubmissions([data, ...submissions]);
+      setSelectedApp(null);
+      setSuccessModalContent({
+        title: "Feedback Submitted!",
+        message: "Thank you for your valuable feedback. Our team will review it shortly."
+      });
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("Failed to submit feedback. Please try again.");
+    }
   };
 
-  const handleProposalSubmit = (data) => {
-    setSubmissions([data, ...submissions]);
-    setShowProposalModal(false);
-    setSuccessModalContent({
-      title: "Proposal Received!",
-      message: "Your innovative idea has been submitted to our Innovation Lab for feasibility review."
-    });
-    setShowSuccessModal(true);
+  const handleProposalSubmit = async (data) => {
+    try {
+      const payload = {
+        submissionType: "Proposal",
+        projectId: null,
+        title: data.title,
+        description: `${data.description}\n\nJustification: ${data.justification}`,
+        department: data.department,
+        beneficiaries: data.beneficiaries,
+        references: data.references,
+        status: "Pending"
+      };
+
+      await submitUserFeedback(payload);
+
+      setRefreshShowcase(prev => prev + 1);
+      setSubmissions([data, ...submissions]);
+      setShowProposalModal(false);
+      setSuccessModalContent({
+        title: "Proposal Received!",
+        message: "Your innovative idea has been submitted to our Innovation Lab for feasibility review."
+      });
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error("Proposal submission failed:", error);
+      alert("Failed to submit proposal. Please try again.");
+    }
   };
 
   const handleLogin = (credentials) => {
@@ -256,7 +292,7 @@ const App = () => {
         </div>
       </section>
 
-      <SubmissionShowcase />
+      <SubmissionShowcase refreshTrigger={refreshShowcase} />
 
       {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-slate-800 py-12 px-6">

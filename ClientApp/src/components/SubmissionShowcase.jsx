@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchRecentSubmissions } from '../services/api';
 
-const SubmissionShowcase = () => {
+const SubmissionShowcase = ({ refreshTrigger }) => {
     const [submissions, setSubmissions] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ const SubmissionShowcase = () => {
         };
 
         loadSubmissions();
-    }, []);
+    }, [refreshTrigger]);
 
     if (loading || submissions.length === 0) return null;
 
@@ -34,13 +34,13 @@ const SubmissionShowcase = () => {
     const SubmissionCard = ({ item }) => (
         <div className="submission-card flex-shrink-0 w-80 p-5 mx-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
             <div className="flex items-center gap-3 mb-3">
-                
+
                 <div className="/*ml-auto*/">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${item.submissionType === 'NewAppProposal' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-300' :
                         item.submissionType === 'FeatureRequest' ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300' :
                             'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-300'
                         }`}>
-                        {item.submissionType === 'NewAppProposal' ? 'Idea' : item.submissionType === 'FeatureRequest' ? 'Feature' : 'Feedback'}
+                        {item.submissionType === 'Proposal' ? 'Idea' : item.submissionType === 'FeatureRequest' ? 'Feature' : 'Feedback'}
                     </span>
                 </div>
             </div>
