@@ -7,7 +7,7 @@ const ProposalModal = ({ onClose, onSubmit }) => {
     const [description, setDescription] = useState('');
     const [beneficiaries, setBeneficiaries] = useState('');
     const [references, setReferences] = useState('');
-    const [department, setDepartment] = useState('IT');
+    /*const [department, setDepartment] = useState('IT');*/
     const [isRefining, setIsRefining] = useState(false);
 
     const handleRefine = async (field, setValue, value) => {
@@ -26,7 +26,7 @@ const ProposalModal = ({ onClose, onSubmit }) => {
             beneficiaries,
             description,
             references,
-            department,
+            /*department,*/
             type: 'Proposal',
             timestamp: new Date(),
         });
@@ -75,8 +75,7 @@ const ProposalModal = ({ onClose, onSubmit }) => {
                             <div>
                                 <label className="block text-sm font-medium mb-2 dark:text-slate-300">Priority</label>
                                 <select
-                                    value={department}
-                                    onChange={(e) => setDepartment(e.target.value)}
+                                    
                                     className="w-full bg-white border border-slate-200 rounded-xl p-3 text-slate-900 outline-none focus:ring-2 focus:ring-orange-500 shadow-sm dark:bg-slate-950/50 dark:border-slate-700 dark:text-white"
                                 >
                                     <option value="HIGH">High - Urgent pain point</option>

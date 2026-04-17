@@ -26,6 +26,16 @@ namespace NtpcNexus.API.Controllers
                 .Take(10)
                 .ToListAsync();
         }
+
+        // GET: api/UserSubmissions
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserSubmission>>> GetAll()
+        {
+            return await _context.UserSubmissions
+                .Include(u => u.Application) // Include Application details for the dashboard
+                .OrderByDescending(u => u.CreatedAt)
+                .ToListAsync();
+        }
         
         // POST: api/UserSubmissions
         [HttpPost]

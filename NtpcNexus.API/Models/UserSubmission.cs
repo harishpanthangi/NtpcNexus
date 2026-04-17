@@ -33,9 +33,6 @@ namespace NtpcNexus.API.Models
         [StringLength(100)]
         public string? SubmittedBy { get; set; }
 
-        [StringLength(100)]
-        public string? Department { get; set; }
-
         public string? Beneficiaries { get; set; }
 
         public string? References { get; set; }

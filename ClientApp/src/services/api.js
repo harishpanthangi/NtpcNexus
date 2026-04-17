@@ -24,6 +24,17 @@ export const fetchRecentSubmissions = async () => {
     }
 };
 
+export const fetchAllSubmissions = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/usersubmissions`);
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to fetch all submissions:", error);
+        return [];
+    }
+};
+
 export const searchApplications = async (query) => {
     try {
         const response = await fetch(`${API_BASE_URL}/applications/search?q=${encodeURIComponent(query)}`);
